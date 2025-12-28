@@ -1,0 +1,25 @@
+{
+  "name": "onca-smb-financial-os",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "A comprehensive SaaS financial management portal featuring real-time cash flow tracking, AI-powered insights, expense management, and compliance tools.",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "recharts": "^2.10.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.0",
+    "@types/react": "^18.2.45",
+    "@types/react-dom": "^18.2.18",
+    "@vitejs/plugin-react": "^4.2.1",
+    "typescript": "^5.3.3",
+    "vite": "^5.0.8"
+  }
+}
