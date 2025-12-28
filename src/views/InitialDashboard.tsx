@@ -49,21 +49,11 @@ const InitialDashboard: React.FC<InitialDashboardProps> = ({ onTransition }) => 
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(16,185,129,0.05),transparent)] pointer-events-none" />
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,rgba(99,102,241,0.05),transparent)] pointer-events-none" />
 
-            <header className="flex items-center gap-3 animate-in fade-in slide-in-from-top-4 duration-1000">
-                <div className="w-12 h-12 bg-primary rounded-2xl flex items-center justify-center text-white shadow-glow">
-                    <span className="material-icons-round text-2xl">donut_large</span>
-                </div>
-                <div>
-                    <h2 className="text-xl font-extrabold tracking-tight text-gray-900">ONCA SMB</h2>
-                    <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Financial OS</p>
-                </div>
-            </header>
-
             <div className="flex-1 flex flex-col justify-center items-center max-w-xl mx-auto w-full text-center">
                 <div className="mb-12 animate-in fade-in zoom-in duration-1000">
                     <div className="relative inline-block">
-                        <div className="w-24 h-24 bg-primary/5 rounded-full flex items-center justify-center mb-8 relative z-10">
-                            <span className="material-icons-round text-5xl text-primary animate-pulse">auto_awesome</span>
+                        <div className="w-32 h-32 bg-beige-50 rounded-full flex items-center justify-center mb-8 relative z-10 p-6">
+                            <img src="/onca-logo.png" alt="ONCA" className="w-full h-full object-contain animate-pulse" />
                         </div>
                         <div className="absolute inset-0 bg-primary/10 rounded-full blur-2xl animate-ping opacity-20" />
                     </div>

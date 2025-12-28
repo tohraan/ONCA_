@@ -17,7 +17,7 @@ const App: React.FC = () => {
     };
 
     return (
-        <div className="w-full h-screen bg-gray-100 flex items-center justify-center">
+        <div className="w-full h-screen bg-beige-100 flex items-center justify-center">
             <div className="w-full h-full bg-white shadow-2xl overflow-hidden relative flex">
                 {currentView === 'DASHBOARD' && (
                     <InitialDashboard onTransition={handleInitialDashboardComplete} />

@@ -1,5 +1,4 @@
-
-import React from 'react';
+import React, { useState } from 'react';
 import { PortalTab } from '../types';
 
 interface SidebarProps {
@@ -8,40 +7,100 @@ interface SidebarProps {
 }
 
 const Sidebar: React.FC<SidebarProps> = ({ activeTab, onTabChange }) => {
+    const [isExpanded, setIsExpanded] = useState(true);
+
     const navItems = [
+        // Core Operations
         { id: 'DASHBOARD', icon: 'home', label: 'Dashboard' },
-        { id: 'INSIGHTS', icon: 'analytics', label: 'Insights' },
-        { id: 'EXPENSES', icon: 'receipt_long', label: 'Expenses' },
-        { id: 'CASHFLOW', icon: 'payments', label: 'Cash Flow' },
+        { id: 'CLIENT_MANAGEMENT', icon: 'people', label: 'Clients' },
+        { id: 'ACCOUNTING', icon: 'account_balance_wallet', label: 'Accounting' },
+
+        // Compliance & Documents
         { id: 'COMPLIANCE', icon: 'verified_user', label: 'Compliance' },
+        { id: 'DOCUMENT_VAULT', icon: 'folder', label: 'Documents' },
+
+        // Analytics
+        { id: 'REPORTS', icon: 'assessment', label: 'Reports' },
+        { id: 'INSIGHTS', icon: 'analytics', label: 'Insights' },
+        { id: 'CASHFLOW', icon: 'payments', label: 'Cash Flow' },
+        { id: 'INVESTMENTS', icon: 'trending_up', label: 'Investments' },
+
+        // Tools
+        { id: 'EXPENSES', icon: 'receipt_long', label: 'Expenses' },
+        { id: 'AI_ASSISTANT', icon: 'smart_toy', label: 'AI Assistant' },
+        { id: 'COMMUNITY', icon: 'forum', label: 'Community' },
     ];
 
     return (
-        <aside className="w-24 flex-shrink-0 flex flex-col items-center py-8 border-r border-gray-200/50 dark:border-gray-700/50 z-20 bg-white/50 dark:bg-gray-800/50 backdrop-blur-xl">
-            <div className="mb-10 p-2 rounded-full bg-primary/10 text-primary">
-                <span className="material-icons-round text-3xl">donut_large</span>
+        <aside className={`flex-shrink-0 flex flex-col py-6 border-r border-beige-200 z-20 bg-white backdrop-blur-xl transition-all duration-300 ${isExpanded ? 'w-64' : 'w-24'
+            }`}>
+            {/* Logo & Toggle */}
+            <div className="px-4 mb-8 flex items-center justify-between">
+                <div className={`flex items-center gap-3 transition-opacity duration-300 ${isExpanded ? 'opacity-100' : 'opacity-0 w-0'}`}>
+                    <div className="w-10 h-10 flex items-center justify-center flex-shrink-0">
+                        <img src="/onca-logo.png" alt="ONCA" className="w-full h-full object-contain" />
+                    </div>
+                    <span className="font-bold text-lg text-beige-900 whitespace-nowrap">ONCA</span>
+                </div>
+                {!isExpanded && (
+                    <div className="w-12 h-12 flex items-center justify-center mx-auto">
+                        <img src="/onca-logo.png" alt="ONCA" className="w-full h-full object-contain" />
+                    </div>
+                )}
+                {isExpanded && (
+                    <button
+                        onClick={() => setIsExpanded(!isExpanded)}
+                        className="p-2 rounded-lg hover:bg-beige-100 text-beige-600 transition-all flex-shrink-0"
+                    >
+                        <span className="material-icons-round text-lg">chevron_left</span>
+                    </button>
+                )}
             </div>
 
-            <nav className="flex-1 flex flex-col gap-6 w-full px-4">
+            {/* Expand button when collapsed */}
+            {!isExpanded && (
+                <button
+                    onClick={() => setIsExpanded(!isExpanded)}
+                    className="mx-auto mb-4 p-2 rounded-lg hover:bg-beige-100 text-beige-600 transition-all"
+                >
+                    <span className="material-icons-round text-lg">chevron_right</span>
+                </button>
+            )}
+
+            <nav className="flex-1 flex flex-col gap-1 px-3">
                 {navItems.map((item) => (
                     <button
                         key={item.id}
                         onClick={() => onTabChange(item.id as PortalTab)}
-                        className={`w-full aspect-square flex items-center justify-center rounded-2xl transition-all relative group ${activeTab === item.id
-                                ? 'bg-gray-900 text-white shadow-lg dark:bg-white dark:text-gray-900'
-                                : 'text-gray-400 hover:bg-white dark:hover:bg-gray-700 hover:shadow-md'
+                        className={`flex items-center gap-3 px-3 py-3 rounded-xl transition-all relative group ${activeTab === item.id
+                                ? 'bg-primary text-white shadow-md'
+                                : 'text-beige-700 hover:bg-beige-100 hover:shadow-sm'
                             }`}
                     >
-                        <span className="material-icons-round">{item.icon}</span>
-                        <span className="absolute left-16 px-2 py-1 bg-gray-900 text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none z-50">
+                        <div className="w-5 h-5 flex items-center justify-center flex-shrink-0">
+                            <span className="material-icons-round text-xl">{item.icon}</span>
+                        </div>
+                        <span className={`font-medium text-sm whitespace-nowrap transition-all duration-300 ${isExpanded ? 'opacity-100 w-auto' : 'opacity-0 w-0 overflow-hidden'
+                            }`}>
                             {item.label}
                         </span>
+                        {!isExpanded && (
+                            <span className="absolute left-20 px-3 py-2 bg-beige-900 text-white text-xs rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none z-50 shadow-lg">
+                                {item.label}
+                            </span>
+                        )}
                     </button>
                 ))}
             </nav>
 
-            <button className="mt-auto p-3 rounded-full bg-white dark:bg-gray-700 shadow-sm hover:shadow-md transition-all text-gray-800 dark:text-white border border-gray-100 dark:border-gray-600">
-                <span className="material-icons-round transform rotate-180">logout</span>
+            <button className="mx-3 mt-4 p-3 rounded-xl bg-beige-50 hover:bg-beige-100 shadow-sm hover:shadow-md transition-all text-beige-800 border border-beige-200 flex items-center gap-3">
+                <div className="w-5 h-5 flex items-center justify-center flex-shrink-0">
+                    <span className="material-icons-round text-xl transform rotate-180">logout</span>
+                </div>
+                <span className={`font-medium text-sm whitespace-nowrap transition-all duration-300 ${isExpanded ? 'opacity-100 w-auto' : 'opacity-0 w-0 overflow-hidden'
+                    }`}>
+                    Logout
+                </span>
             </button>
         </aside>
     );

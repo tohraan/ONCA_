@@ -1,20 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ONCA SMB - Financial OS</title>
-    <meta name="description" content="A comprehensive SaaS financial management portal featuring real-time cash flow tracking, AI-powered insights, expense management, and compliance tools.">
-    
+    <meta name="description"
+        content="A comprehensive SaaS financial management portal featuring real-time cash flow tracking, AI-powered insights, expense management, and compliance tools.">
+
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com?plugins=forms,typography,container-queries"></script>
-    
+
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+
     <!-- Material Icons -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
-    
+
     <!-- Tailwind Configuration -->
     <script>
         tailwind.config = {
@@ -22,36 +26,53 @@
             theme: {
                 extend: {
                     colors: {
-                        primary: "#10B981",
-                        "primary-dark": "#059669",
+                        // Primary: Dark Green
+                        primary: "#00674F",
+                        "primary-dark": "#004D3B",
+                        "primary-light": "#008060",
                         "primary-foreground": "#FFFFFF",
-                        "onca-green": "#22705e",
-                        "background-light": "#F3F4F6",
-                        "background-dark": "#111827",
-                        "surface-light": "#FFFFFF",
-                        "surface-dark": "#1F2937",
-                        "beige-light": "#F5F5F4",
-                        "beige-dark": "#1C1917"
+
+                        // Secondary: Beige
+                        secondary: "#F5F5DC",
+                        "secondary-dark": "#E8E8C8",
+                        "secondary-light": "#FAFAED",
+
+                        // ONCA Brand Colors
+                        "onca-green": "#00674F",
+                        "onca-beige": "#F5F5DC",
+
+                        // Neutral Palette (Beige-based)
+                        "beige-50": "#FAFAED",
+                        "beige-100": "#F5F5DC",
+                        "beige-200": "#E8E8C8",
+                        "beige-300": "#D4D4B4",
+                        "beige-400": "#B8B89A",
+                        "beige-500": "#9C9C80",
+                        "beige-600": "#7A7A66",
+                        "beige-700": "#5C5C4D",
+                        "beige-800": "#3E3E33",
+                        "beige-900": "#1F1F1A",
                     },
                     fontFamily: {
-                        sans: ['"Plus Jakarta Sans"', 'Inter', 'sans-serif'],
+                        sans: ['"Plus Jakarta Sans"', 'Inter', 'system-ui', 'sans-serif'],
+                    },
+                    spacing: {
+                        'card': '2rem',      // 32px - consistent card padding
+                        'section': '2.5rem', // 40px - section spacing
                     },
                     borderRadius: {
-                        DEFAULT: "1rem",
-                        'xl': "1.5rem",
-                        '2xl': "2rem",
-                        '3xl': "2.5rem",
+                        'card': '1.5rem',    // 24px - consistent card radius
+                        'button': '0.75rem', // 12px - button radius
+                        'input': '0.75rem',  // 12px - input radius
                     },
                     boxShadow: {
-                        'soft': '0 4px 20px -2px rgba(0, 0, 0, 0.05)',
-                        'glow': '0 0 15px rgba(16, 185, 129, 0.3)',
-                        'card': '0 10px 40px -10px rgba(0,0,0,0.05)',
+                        'card': '0 4px 20px -2px rgba(0, 103, 79, 0.08)',
+                        'card-hover': '0 8px 30px -4px rgba(0, 103, 79, 0.12)',
+                        'soft': '0 2px 10px -1px rgba(0, 103, 79, 0.06)',
+                        'glow': '0 0 20px rgba(0, 103, 79, 0.25)',
                     },
                     animation: {
                         'in': 'fadeIn 0.5s ease-out',
-                        'bounce': 'bounce 1s infinite',
-                        'pulse': 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-                        'ping': 'ping 1s cubic-bezier(0, 0, 0.2, 1) infinite',
                     },
                     keyframes: {
                         fadeIn: {
@@ -63,7 +84,7 @@
             },
         };
     </script>
-    
+
     <!-- Custom Styles -->
     <style>
         body {
@@ -71,113 +92,126 @@
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
         }
-        
+
         /* Custom Scrollbar */
         .custom-scrollbar::-webkit-scrollbar {
             width: 6px;
             height: 6px;
         }
+
         .custom-scrollbar::-webkit-scrollbar-track {
             background: transparent;
         }
+
         .custom-scrollbar::-webkit-scrollbar-thumb {
-            background: #E5E7EB;
+            background: #D4D4B4;
             border-radius: 3px;
         }
-        .dark .custom-scrollbar::-webkit-scrollbar-thumb {
-            background: #374151;
+
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #B8B89A;
         }
-        
+
+        .dark .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #5C5C4D;
+        }
+
         /* Glassmorphism */
         .glass {
-            background: rgba(255, 255, 255, 0.7);
+            background: rgba(245, 245, 220, 0.7);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.5);
+            border: 1px solid rgba(245, 245, 220, 0.5);
         }
+
         .dark .glass {
-            background: rgba(31, 41, 55, 0.7);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(94, 94, 77, 0.7);
+            border: 1px solid rgba(245, 245, 220, 0.1);
         }
-        
+
         /* Animations */
         @keyframes fadeIn {
             from {
                 opacity: 0;
                 transform: translateY(10px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
             }
         }
-        
+
         .animate-in {
             animation: fadeIn 0.5s ease-out;
         }
-        
+
         .fade-in {
             animation: fadeIn 0.5s ease-out;
         }
-        
+
         .slide-in-from-top-4 {
             animation: slideInFromTop 0.5s ease-out;
         }
-        
+
         .slide-in-from-bottom-4 {
             animation: slideInFromBottom 0.5s ease-out;
         }
-        
+
         .slide-in-from-bottom-8 {
             animation: slideInFromBottom 0.7s ease-out;
         }
-        
+
         .slide-in-from-right-4 {
             animation: slideInFromRight 0.5s ease-out;
         }
-        
+
         .zoom-in {
             animation: zoomIn 0.5s ease-out;
         }
-        
+
         @keyframes slideInFromTop {
             from {
                 opacity: 0;
                 transform: translateY(-1rem);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
             }
         }
-        
+
         @keyframes slideInFromBottom {
             from {
                 opacity: 0;
                 transform: translateY(1rem);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
             }
         }
-        
+
         @keyframes slideInFromRight {
             from {
                 opacity: 0;
                 transform: translateX(1rem);
             }
+
             to {
                 opacity: 1;
                 transform: translateX(0);
             }
         }
-        
+
         @keyframes zoomIn {
             from {
                 opacity: 0;
                 transform: scale(0.95);
             }
+
             to {
                 opacity: 1;
                 transform: scale(1);
@@ -185,8 +219,10 @@
         }
     </style>
 </head>
-<body class="bg-gray-100 dark:bg-gray-900 transition-colors duration-300">
+
+<body class="bg-beige-100 dark:bg-beige-900 transition-colors duration-300">
     <div id="root"></div>
     <script type="module" src="/src/index.tsx"></script>
 </body>
+
 </html>
