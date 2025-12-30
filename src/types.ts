@@ -13,7 +13,8 @@ export type PortalTab =
     | 'AI_ASSISTANT'
     | 'COMMUNITY'
     | 'INSIGHTS'
-    | 'EXPENSES';
+    | 'EXPENSES'
+    | 'SETTINGS';
 
 export interface UserProfile {
     name: string;
@@ -130,4 +131,26 @@ export interface Expert {
     rating: number;
     consultations: number;
     availability: 'available' | 'busy';
+}
+
+// Settings Types
+export interface AppPermissions {
+    notifications: boolean;
+    dataSync: boolean;
+    analytics: boolean;
+}
+
+export interface AppSettings {
+    theme: 'light' | 'dark';
+    currency: string;
+    permissions: AppPermissions;
+}
+
+export interface UserProfileData {
+    name: string;
+    email: string;
+    phone: string;
+    country: string;
+    businessName: string;
+    avatar: string;
 }

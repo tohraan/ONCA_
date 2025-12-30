@@ -29,28 +29,29 @@ const Sidebar: React.FC<SidebarProps> = ({ activeTab, onTabChange }) => {
         { id: 'EXPENSES', icon: 'receipt_long', label: 'Expenses' },
         { id: 'AI_ASSISTANT', icon: 'smart_toy', label: 'AI Assistant' },
         { id: 'COMMUNITY', icon: 'forum', label: 'Community' },
+        { id: 'SETTINGS', icon: 'settings', label: 'Settings' },
     ];
 
     return (
-        <aside className={`flex-shrink-0 flex flex-col py-6 border-r border-beige-200 z-20 bg-white backdrop-blur-xl transition-all duration-300 ${isExpanded ? 'w-64' : 'w-24'
+        <aside className={`flex-shrink-0 flex flex-col py-6 border-r border-beige-200 dark:border-white/5 z-20 bg-white dark:bg-dark-base backdrop-blur-xl transition-all duration-300 ${isExpanded ? 'w-64' : 'w-24'
             }`}>
             {/* Logo & Toggle */}
             <div className="px-4 mb-8 flex items-center justify-between">
                 <div className={`flex items-center gap-3 transition-opacity duration-300 ${isExpanded ? 'opacity-100' : 'opacity-0 w-0'}`}>
                     <div className="w-10 h-10 flex items-center justify-center flex-shrink-0">
-                        <img src="/onca-logo.png" alt="ONCA" className="w-full h-full object-contain" />
+                        <img src="/onca-logo.png" alt="ONCA" className="w-full h-full object-contain dark:invert" />
                     </div>
-                    <span className="font-bold text-lg text-beige-900 whitespace-nowrap">ONCA</span>
+                    <span className="font-bold text-lg text-beige-900 dark:text-dark-text-primary whitespace-nowrap">ONCA</span>
                 </div>
                 {!isExpanded && (
                     <div className="w-12 h-12 flex items-center justify-center mx-auto">
-                        <img src="/onca-logo.png" alt="ONCA" className="w-full h-full object-contain" />
+                        <img src="/onca-logo.png" alt="ONCA" className="w-full h-full object-contain dark:invert" />
                     </div>
                 )}
                 {isExpanded && (
                     <button
                         onClick={() => setIsExpanded(!isExpanded)}
-                        className="p-2 rounded-lg hover:bg-beige-100 text-beige-600 transition-all flex-shrink-0"
+                        className="p-2 rounded-lg hover:bg-beige-100 dark:hover:bg-white/5 text-beige-600 dark:text-dark-text-disabled transition-all flex-shrink-0"
                     >
                         <span className="material-icons-round text-lg">chevron_left</span>
                     </button>
@@ -61,7 +62,7 @@ const Sidebar: React.FC<SidebarProps> = ({ activeTab, onTabChange }) => {
             {!isExpanded && (
                 <button
                     onClick={() => setIsExpanded(!isExpanded)}
-                    className="mx-auto mb-4 p-2 rounded-lg hover:bg-beige-100 text-beige-600 transition-all"
+                    className="mx-auto mb-4 p-2 rounded-lg hover:bg-beige-100 dark:hover:bg-white/5 text-beige-600 dark:text-dark-text-disabled transition-all"
                 >
                     <span className="material-icons-round text-lg">chevron_right</span>
                 </button>
@@ -73,8 +74,8 @@ const Sidebar: React.FC<SidebarProps> = ({ activeTab, onTabChange }) => {
                         key={item.id}
                         onClick={() => onTabChange(item.id as PortalTab)}
                         className={`flex items-center gap-3 px-3 py-3 rounded-xl transition-all relative group ${activeTab === item.id
-                                ? 'bg-primary text-white shadow-md'
-                                : 'text-beige-700 hover:bg-beige-100 hover:shadow-sm'
+                            ? 'bg-primary dark:bg-dark-accent text-white dark:text-dark-base shadow-md'
+                            : 'text-beige-700 dark:text-dark-text-secondary hover:bg-beige-100 dark:hover:bg-white/5 hover:text-beige-900 dark:hover:text-dark-text-primary'
                             }`}
                     >
                         <div className="w-5 h-5 flex items-center justify-center flex-shrink-0">
@@ -85,7 +86,7 @@ const Sidebar: React.FC<SidebarProps> = ({ activeTab, onTabChange }) => {
                             {item.label}
                         </span>
                         {!isExpanded && (
-                            <span className="absolute left-20 px-3 py-2 bg-beige-900 text-white text-xs rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none z-50 shadow-lg">
+                            <span className="absolute left-20 px-3 py-2 bg-beige-900 dark:bg-dark-surface text-white dark:text-dark-text-primary text-xs rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none z-50 shadow-lg">
                                 {item.label}
                             </span>
                         )}
@@ -93,7 +94,7 @@ const Sidebar: React.FC<SidebarProps> = ({ activeTab, onTabChange }) => {
                 ))}
             </nav>
 
-            <button className="mx-3 mt-4 p-3 rounded-xl bg-beige-50 hover:bg-beige-100 shadow-sm hover:shadow-md transition-all text-beige-800 border border-beige-200 flex items-center gap-3">
+            <button className="mx-3 mt-4 p-3 rounded-xl bg-beige-50 dark:bg-white/5 hover:bg-beige-100 dark:hover:bg-white/10 shadow-sm hover:shadow-md transition-all text-beige-800 dark:text-dark-text-secondary border border-beige-200 dark:border-white/5 flex items-center gap-3">
                 <div className="w-5 h-5 flex items-center justify-center flex-shrink-0">
                     <span className="material-icons-round text-xl transform rotate-180">logout</span>
                 </div>

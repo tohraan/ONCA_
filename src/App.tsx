@@ -1,37 +1,43 @@
-
 import React, { useState } from 'react';
-import InitialDashboard from './views/InitialDashboard';
-import Onboarding from './views/Onboarding';
 import FullPortal from './views/FullPortal';
-import { AppView } from './types';
+import Onboarding from './views/Onboarding';
+import InitialDashboard from './views/InitialDashboard';
+import { SettingsProvider } from './contexts/SettingsContext';
+
+type AppStage = 'LOADING' | 'ONBOARDING' | 'PORTAL';
 
 const App: React.FC = () => {
-    const [currentView, setCurrentView] = useState<AppView>('DASHBOARD');
+    const [stage, setStage] = useState<AppStage>('LOADING');
 
-    const handleInitialDashboardComplete = () => {
-        setCurrentView('ONBOARDING');
+    const handleLoadingComplete = () => {
+        const isOnboarded = localStorage.getItem('onca_onboarded') === 'true';
+        setStage(isOnboarded ? 'PORTAL' : 'ONBOARDING');
     };
 
     const handleOnboardingComplete = () => {
-        setCurrentView('PORTAL');
+        localStorage.setItem('onca_onboarded', 'true');
+        setStage('PORTAL');
+    };
+
+    const renderStage = () => {
+        switch (stage) {
+            case 'LOADING':
+                return <InitialDashboard onTransition={handleLoadingComplete} />;
+            case 'ONBOARDING':
+                return <Onboarding onComplete={handleOnboardingComplete} />;
+            case 'PORTAL':
+                return <FullPortal />;
+            default:
+                return <InitialDashboard onTransition={handleLoadingComplete} />;
+        }
     };
 
     return (
-        <div className="w-full h-screen bg-beige-100 flex items-center justify-center">
-            <div className="w-full h-full bg-white shadow-2xl overflow-hidden relative flex">
-                {currentView === 'DASHBOARD' && (
-                    <InitialDashboard onTransition={handleInitialDashboardComplete} />
-                )}
-
-                {currentView === 'ONBOARDING' && (
-                    <Onboarding onComplete={handleOnboardingComplete} />
-                )}
-
-                {currentView === 'PORTAL' && (
-                    <FullPortal />
-                )}
+        <SettingsProvider>
+            <div className="flex h-screen bg-beige-50 dark:bg-dark-bg font-sans text-beige-900 transition-colors duration-300">
+                {renderStage()}
             </div>
-        </div>
+        </SettingsProvider>
     );
 };
 

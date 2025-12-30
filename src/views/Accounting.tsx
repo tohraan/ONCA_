@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React from 'react';
 import KPICard from '../components/KPICard';
 import Button from '../components/Button';
 import SearchBar from '../components/SearchBar';
@@ -7,10 +7,10 @@ import Select from '../components/Select';
 import StatusBadge from '../components/StatusBadge';
 import QuickActions from '../components/QuickActions';
 import { Transaction, BankAccount } from '../types';
+import { useSettings } from '../contexts/SettingsContext';
 
 const Accounting: React.FC = () => {
-    const [searchQuery, setSearchQuery] = useState('');
-
+    const { currencySymbol } = useSettings();
     // Mock data
     const transactions: Transaction[] = [
         {
@@ -102,8 +102,8 @@ const Accounting: React.FC = () => {
             {/* Header */}
             <div className="flex flex-col md:flex-row items-start md:items-center justify-between mb-8 gap-6 mt-8">
                 <div>
-                    <h1 className="text-4xl font-bold mb-2 tracking-tight text-beige-900">Accounting</h1>
-                    <p className="text-beige-600 text-lg">Manage your books, transactions, and bank accounts</p>
+                    <h1 className="text-4xl font-bold mb-2 tracking-tight text-beige-900 dark:text-dark-text-primary">Accounting</h1>
+                    <p className="text-beige-600 dark:text-dark-text-secondary text-lg">Manage your books, transactions, and bank accounts</p>
                 </div>
                 <QuickActions
                     actions={[
@@ -135,48 +135,48 @@ const Accounting: React.FC = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
                 <KPICard
                     title="Cash Balance"
-                    value="₹4,25,000"
+                    value={`${currencySymbol}4,25,000`}
                     change={8.2}
                     icon="account_balance_wallet"
-                    iconColor="text-primary"
-                    iconBg="bg-primary/10"
+                    iconColor="text-primary dark:text-dark-accent"
+                    iconBg="bg-primary/10 dark:bg-dark-accent/10"
                 />
                 <KPICard
                     title="Bank Balance"
-                    value="₹12,85,000"
+                    value={`${currencySymbol}12,85,000`}
                     change={12.5}
                     icon="account_balance"
-                    iconColor="text-blue-600"
-                    iconBg="bg-blue-50"
+                    iconColor="text-blue-600 dark:text-blue-400"
+                    iconBg="bg-blue-50 dark:bg-blue-900/10"
                 />
                 <KPICard
                     title="Accounts Receivable"
-                    value="₹3,45,000"
+                    value={`${currencySymbol}3,45,000`}
                     change={-5.3}
                     icon="trending_down"
-                    iconColor="text-amber-600"
-                    iconBg="bg-amber-50"
+                    iconColor="text-amber-600 dark:text-amber-400"
+                    iconBg="bg-amber-50 dark:bg-amber-900/10"
                 />
                 <KPICard
                     title="Accounts Payable"
-                    value="₹2,15,000"
+                    value={`${currencySymbol}2,15,000`}
                     change={3.7}
                     icon="trending_up"
-                    iconColor="text-red-600"
-                    iconBg="bg-red-50"
+                    iconColor="text-red-600 dark:text-red-400"
+                    iconBg="bg-red-50 dark:bg-red-900/10"
                 />
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
                 {/* Recent Transactions */}
                 <div className="lg:col-span-2">
-                    <div className="bg-white rounded-card shadow-card border border-beige-200">
+                    <div className="bg-white dark:bg-dark-surface/65 backdrop-blur-xl rounded-card shadow-card border border-beige-200 dark:border-white/5 overflow-hidden">
                         {/* Filters */}
-                        <div className="p-6 border-b border-beige-200">
+                        <div className="p-6 border-b border-beige-200 dark:border-white/5">
                             <div className="flex flex-col md:flex-row gap-4">
                                 <SearchBar
                                     placeholder="Search transactions..."
-                                    onSearch={setSearchQuery}
+                                    onSearch={() => { }}
                                 />
                                 <Select
                                     options={[
@@ -204,38 +204,38 @@ const Accounting: React.FC = () => {
                         </div>
 
                         {/* Transaction List */}
-                        <div className="divide-y divide-beige-100">
+                        <div className="divide-y divide-beige-100 dark:divide-white/5">
                             {transactions.map((tx) => (
                                 <div
                                     key={tx.id}
-                                    className="p-6 hover:bg-beige-50 transition-colors cursor-pointer group"
+                                    className="p-6 hover:bg-beige-50 dark:hover:bg-white/5 transition-colors cursor-pointer group"
                                 >
                                     <div className="flex items-center justify-between">
                                         <div className="flex items-center gap-4">
                                             <div className={`w-12 h-12 rounded-2xl flex items-center justify-center ${tx.type === 'income'
-                                                ? 'bg-emerald-50 text-emerald-600'
-                                                : 'bg-red-50 text-red-500'
+                                                ? 'bg-emerald-50 dark:bg-emerald-900/20 text-emerald-600 dark:text-emerald-400'
+                                                : 'bg-red-50 dark:bg-red-900/20 text-red-500 dark:text-red-400'
                                                 }`}>
                                                 <span className="material-icons-round">
                                                     {tx.type === 'income' ? 'north_east' : 'south_east'}
                                                 </span>
                                             </div>
                                             <div>
-                                                <p className="font-bold text-beige-900">{tx.description}</p>
+                                                <p className="font-bold text-beige-900 dark:text-dark-text-primary">{tx.description}</p>
                                                 <div className="flex items-center gap-3 mt-1">
-                                                    <p className="text-sm text-beige-600">{tx.date}</p>
-                                                    <span className="text-beige-400">•</span>
-                                                    <p className="text-sm text-beige-600">{tx.account}</p>
-                                                    <span className="text-beige-400">•</span>
-                                                    <p className="text-sm text-beige-600">{tx.transactionId}</p>
+                                                    <p className="text-sm text-beige-600 dark:text-dark-text-secondary">{tx.date}</p>
+                                                    <span className="text-beige-400 dark:text-dark-text-disabled">•</span>
+                                                    <p className="text-sm text-beige-600 dark:text-dark-text-secondary">{tx.account}</p>
+                                                    <span className="text-beige-400 dark:text-dark-text-disabled">•</span>
+                                                    <p className="text-sm text-beige-600 dark:text-dark-text-secondary">{tx.transactionId}</p>
                                                 </div>
                                             </div>
                                         </div>
                                         <div className="text-right flex items-center gap-6">
                                             <div>
-                                                <p className={`font-bold text-lg ${tx.type === 'income' ? 'text-emerald-600' : 'text-beige-900'
+                                                <p className={`font-bold text-lg ${tx.type === 'income' ? 'text-emerald-600 dark:text-emerald-400' : 'text-beige-900 dark:text-dark-text-primary'
                                                     }`}>
-                                                    {tx.type === 'income' ? '+' : ''}₹{Math.abs(tx.amount).toLocaleString()}
+                                                    {tx.type === 'income' ? '+' : ''}{currencySymbol}{Math.abs(tx.amount).toLocaleString()}
                                                 </p>
                                                 <div className="flex items-center gap-2 mt-1 justify-end">
                                                     <StatusBadge
@@ -250,7 +250,7 @@ const Accounting: React.FC = () => {
                                                     />
                                                 </div>
                                             </div>
-                                            <span className="material-icons-round text-beige-300 group-hover:text-primary transition-colors">
+                                            <span className="material-icons-round text-beige-300 dark:text-dark-text-disabled group-hover:text-primary dark:group-hover:text-dark-accent transition-colors">
                                                 chevron_right
                                             </span>
                                         </div>
@@ -263,11 +263,11 @@ const Accounting: React.FC = () => {
 
                 {/* Bank Accounts Sidebar */}
                 <div className="lg:col-span-1">
-                    <div className="bg-white rounded-card p-card shadow-card border border-beige-200 sticky top-8">
+                    <div className="bg-white dark:bg-dark-surface/65 backdrop-blur-xl rounded-card p-card shadow-card border border-beige-200 dark:border-white/5 sticky top-8">
                         <div className="flex items-center justify-between mb-6">
-                            <h3 className="text-xl font-bold text-beige-900">Bank Accounts</h3>
-                            <button className="p-2 hover:bg-beige-100 rounded-full transition-colors">
-                                <span className="material-icons-round text-beige-600">more_vert</span>
+                            <h3 className="text-xl font-bold text-beige-900 dark:text-dark-text-primary">Bank Accounts</h3>
+                            <button className="p-2 hover:bg-beige-100 dark:hover:bg-white/10 rounded-full transition-colors">
+                                <span className="material-icons-round text-beige-600 dark:text-dark-text-secondary">more_vert</span>
                             </button>
                         </div>
 
@@ -275,12 +275,12 @@ const Accounting: React.FC = () => {
                             {bankAccounts.map((account) => (
                                 <div
                                     key={account.id}
-                                    className="p-4 bg-beige-50 rounded-xl border border-beige-200 hover:border-primary transition-all cursor-pointer"
+                                    className="p-4 bg-beige-50 dark:bg-white/5 rounded-xl border border-beige-200 dark:border-white/10 hover:border-primary dark:hover:border-dark-accent transition-all cursor-pointer"
                                 >
                                     <div className="flex items-start justify-between mb-3">
                                         <div>
-                                            <p className="font-bold text-beige-900">{account.bankName}</p>
-                                            <p className="text-sm text-beige-600">{account.accountType}</p>
+                                            <p className="font-bold text-beige-900 dark:text-dark-text-primary">{account.bankName}</p>
+                                            <p className="text-sm text-beige-600 dark:text-dark-text-secondary">{account.accountType}</p>
                                         </div>
                                         <StatusBadge
                                             status={account.status === 'connected' ? 'success' : 'danger'}
@@ -290,15 +290,15 @@ const Accounting: React.FC = () => {
                                     </div>
                                     <div className="flex items-center justify-between">
                                         <div>
-                                            <p className="text-2xl font-bold text-beige-900">
-                                                ₹{account.balance.toLocaleString()}
+                                            <p className="text-2xl font-bold text-beige-900 dark:text-dark-text-primary">
+                                                {currencySymbol}{account.balance.toLocaleString()}
                                             </p>
-                                            <p className="text-xs text-beige-500 mt-1">
+                                            <p className="text-xs text-beige-500 dark:text-dark-text-disabled mt-1">
                                                 Last sync: {account.lastSync}
                                             </p>
                                         </div>
-                                        <button className="p-2 hover:bg-white rounded-full transition-colors">
-                                            <span className="material-icons-round text-beige-600">sync</span>
+                                        <button className="p-2 hover:bg-white dark:hover:bg-white/10 rounded-full transition-colors">
+                                            <span className="material-icons-round text-beige-600 dark:text-dark-text-secondary">sync</span>
                                         </button>
                                     </div>
                                 </div>

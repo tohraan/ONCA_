@@ -12,19 +12,40 @@
 - **Secondary Dark**: `#E8E8C8` - Borders, dividers
 - **Secondary Light**: `#FAFAED` - Page backgrounds
 
-### Neutral Palette (Beige-based)
-- `beige-50`: `#FAFAED` - Lightest background
-- `beige-100`: `#F5F5DC` - Card backgrounds
-- `beige-200`: `#E8E8C8` - Borders, dividers
-- `beige-300`: `#D4D4B4` - Disabled states
-- `beige-400`: `#B8B89A` - Placeholder text
-- `beige-500`: `#9C9C80` - Secondary text
-- `beige-600`: `#7A7A66` - Body text
-- `beige-700`: `#5C5C4D` - Headings
-- `beige-800`: `#3E3E33` - Dark text
-- `beige-900`: `#1F1F1A` - Darkest text
+## Dark Mode Palette (ONCA Premium)
 
-## Typography
+### Base Background
+- **Deep Charcoal Green**: `#0F1512` - Replaces beige-900/50 in dark mode. Provides brand continuity and reduces eye strain.
+
+### Surface / Card Background
+- **Smoked Green Glass**: `rgba(24, 36, 30, 0.65)`
+- **Glass Effect**:
+  - `backdrop-filter: blur(18px)`
+  - `border: 1px solid rgba(255, 255, 255, 0.06)`
+  - `box-shadow: 0 20px 40px rgba(0, 0, 0, 0.45)`
+
+### Primary Accent (Muted Emerald)
+- **Color**: `#3FAF8A` - Used for CTAs, active states, and metrics in dark mode. Avoids neon glows to maintain trust.
+
+### Secondary Accent (Warm Stone)
+- **Color**: `#CBBFAE` - Replaces beige accents for secondary buttons, tags, and dividers.
+
+### Text System
+- **Primary Text**: `#E7ECE9`
+- **Secondary Text**: `#A6B1AB`
+- **Disabled/Meta Text**: `#6E7C75`
+
+### Status Colors (Dark-safe)
+- **Success**: `#4BC89E`
+- **Warning**: `#E0B86B`
+- **Error**: `#E06B6B`
+- **Info**: `#6FA8DC`
+
+### Borders & Dividers
+- `rgba(255, 255, 255, 0.08)` - Subtle separation.
+
+## Spacing
+... (rest of the content remains)
 
 ### Font Families
 - **Primary**: Plus Jakarta Sans (headings, UI elements)

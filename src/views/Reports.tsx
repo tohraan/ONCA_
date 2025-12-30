@@ -1,7 +1,6 @@
 
 import React, { useState } from 'react';
 import KPICard from '../components/KPICard';
-import Button from '../components/Button';
 import Select from '../components/Select';
 import QuickActions from '../components/QuickActions';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, BarChart, Bar, PieChart, Pie, Cell } from 'recharts';
@@ -40,8 +39,8 @@ const Reports: React.FC = () => {
             {/* Header */}
             <div className="flex flex-col md:flex-row items-start md:items-center justify-between mb-8 gap-6 mt-8">
                 <div>
-                    <h1 className="text-4xl font-bold mb-2 tracking-tight text-beige-900">Reports & Analytics</h1>
-                    <p className="text-beige-600 text-lg">Visualize your business performance and financial health</p>
+                    <h1 className="text-4xl font-bold mb-2 tracking-tight text-beige-900 dark:text-dark-text-primary">Reports & Analytics</h1>
+                    <p className="text-beige-600 dark:text-dark-text-secondary text-lg">Visualize your business performance and financial health</p>
                 </div>
                 <div className="flex gap-3">
                     <Select
@@ -90,8 +89,8 @@ const Reports: React.FC = () => {
                     value="₹3,28,000"
                     change={15.3}
                     icon="trending_up"
-                    iconColor="text-primary"
-                    iconBg="bg-primary/10"
+                    iconColor="text-primary dark:text-dark-accent"
+                    iconBg="bg-primary/10 dark:bg-dark-accent/10"
                     subtitle="vs last period"
                 />
                 <KPICard
@@ -99,8 +98,8 @@ const Reports: React.FC = () => {
                     value="₹1,14,000"
                     change={18.7}
                     icon="account_balance"
-                    iconColor="text-emerald-600"
-                    iconBg="bg-emerald-50"
+                    iconColor="text-emerald-600 dark:text-emerald-400"
+                    iconBg="bg-emerald-50 dark:bg-emerald-900/10"
                     subtitle="34.8% margin"
                 />
                 <KPICard
@@ -108,16 +107,16 @@ const Reports: React.FC = () => {
                     value="65.2%"
                     change={-2.4}
                     icon="pie_chart"
-                    iconColor="text-blue-600"
-                    iconBg="bg-blue-50"
+                    iconColor="text-blue-600 dark:text-blue-400"
+                    iconBg="bg-blue-50 dark:bg-blue-900/10"
                     subtitle="of revenue"
                 />
                 <KPICard
                     title="Compliance Score"
                     value="98%"
                     icon="verified"
-                    iconColor="text-amber-600"
-                    iconBg="bg-amber-50"
+                    iconColor="text-amber-600 dark:text-amber-400"
+                    iconBg="bg-amber-50 dark:bg-amber-900/10"
                     subtitle="on-time filings"
                 />
             </div>
@@ -125,14 +124,14 @@ const Reports: React.FC = () => {
             {/* Charts Grid */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
                 {/* Revenue vs Expenses */}
-                <div className="bg-white rounded-card p-card shadow-card border border-beige-200">
+                <div className="bg-white dark:bg-dark-surface/65 backdrop-blur-xl rounded-card p-card shadow-card border border-beige-200 dark:border-white/5">
                     <div className="flex items-center justify-between mb-6">
                         <div>
-                            <h3 className="text-xl font-bold text-beige-900">Revenue vs Expenses</h3>
-                            <p className="text-sm text-beige-600">6-month trend analysis</p>
+                            <h3 className="text-xl font-bold text-beige-900 dark:text-dark-text-primary">Revenue vs Expenses</h3>
+                            <p className="text-sm text-beige-600 dark:text-dark-text-secondary">6-month trend analysis</p>
                         </div>
-                        <button className="p-2 hover:bg-beige-100 rounded-full transition-colors">
-                            <span className="material-icons-round text-beige-600">more_vert</span>
+                        <button className="p-2 hover:bg-beige-100 dark:hover:bg-white/10 rounded-full transition-colors">
+                            <span className="material-icons-round text-beige-600 dark:text-dark-text-secondary">more_vert</span>
                         </button>
                     </div>
                     <div className="h-[300px]">
@@ -140,19 +139,19 @@ const Reports: React.FC = () => {
                             <AreaChart data={revenueData}>
                                 <defs>
                                     <linearGradient id="colorRevenue" x1="0" y1="0" x2="0" y2="1">
-                                        <stop offset="5%" stopColor="#00674F" stopOpacity={0.3} />
-                                        <stop offset="95%" stopColor="#00674F" stopOpacity={0} />
+                                        <stop offset="5%" stopColor="var(--tw-primary, #00674F)" stopOpacity={0.3} />
+                                        <stop offset="95%" stopColor="var(--tw-primary, #00674F)" stopOpacity={0} />
                                     </linearGradient>
                                     <linearGradient id="colorExpenses" x1="0" y1="0" x2="0" y2="1">
                                         <stop offset="5%" stopColor="#EF4444" stopOpacity={0.3} />
                                         <stop offset="95%" stopColor="#EF4444" stopOpacity={0} />
                                     </linearGradient>
                                 </defs>
-                                <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#E8E8C8" />
-                                <XAxis dataKey="month" axisLine={false} tickLine={false} tick={{ fill: '#9C9C80', fontSize: 12 }} />
-                                <YAxis axisLine={false} tickLine={false} tick={{ fill: '#9C9C80', fontSize: 12 }} />
-                                <Tooltip contentStyle={{ borderRadius: '12px', border: 'none', boxShadow: '0 4px 12px rgba(0,0,0,0.1)' }} />
-                                <Area type="monotone" dataKey="revenue" stroke="#00674F" fillOpacity={1} fill="url(#colorRevenue)" strokeWidth={3} />
+                                <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="currentColor" className="text-beige-200 dark:text-white/5" />
+                                <XAxis dataKey="month" axisLine={false} tickLine={false} tick={{ fill: 'currentColor', fontSize: 12 }} className="text-beige-400 dark:text-dark-text-disabled" />
+                                <YAxis axisLine={false} tickLine={false} tick={{ fill: 'currentColor', fontSize: 12 }} className="text-beige-400 dark:text-dark-text-disabled" />
+                                <Tooltip contentStyle={{ borderRadius: '12px', border: 'none', boxShadow: '0 4px 12px rgba(0,0,0,0.1)', backgroundColor: 'rgba(30, 30, 30, 0.8)', color: '#fff' }} itemStyle={{ color: '#fff' }} />
+                                <Area type="monotone" dataKey="revenue" stroke="#00674F" fillOpacity={1} fill="url(#colorRevenue)" strokeWidth={3} className="stroke-primary dark:stroke-dark-accent" />
                                 <Area type="monotone" dataKey="expenses" stroke="#EF4444" fillOpacity={1} fill="url(#colorExpenses)" strokeWidth={3} />
                             </AreaChart>
                         </ResponsiveContainer>
@@ -160,14 +159,14 @@ const Reports: React.FC = () => {
                 </div>
 
                 {/* Expense Breakdown */}
-                <div className="bg-white rounded-card p-card shadow-card border border-beige-200">
+                <div className="bg-white dark:bg-dark-surface/65 backdrop-blur-xl rounded-card p-card shadow-card border border-beige-200 dark:border-white/5">
                     <div className="flex items-center justify-between mb-6">
                         <div>
-                            <h3 className="text-xl font-bold text-beige-900">Expense Breakdown</h3>
-                            <p className="text-sm text-beige-600">Category distribution</p>
+                            <h3 className="text-xl font-bold text-beige-900 dark:text-dark-text-primary">Expense Breakdown</h3>
+                            <p className="text-sm text-beige-600 dark:text-dark-text-secondary">Category distribution</p>
                         </div>
-                        <button className="p-2 hover:bg-beige-100 rounded-full transition-colors">
-                            <span className="material-icons-round text-beige-600">more_vert</span>
+                        <button className="p-2 hover:bg-beige-100 dark:hover:bg-white/10 rounded-full transition-colors">
+                            <span className="material-icons-round text-beige-600 dark:text-dark-text-secondary">more_vert</span>
                         </button>
                     </div>
                     <div className="h-[300px] flex items-center justify-center">
@@ -186,7 +185,7 @@ const Reports: React.FC = () => {
                                         <Cell key={`cell-${index}`} fill={entry.color} />
                                     ))}
                                 </Pie>
-                                <Tooltip contentStyle={{ borderRadius: '12px', border: 'none', boxShadow: '0 4px 12px rgba(0,0,0,0.1)' }} />
+                                <Tooltip contentStyle={{ borderRadius: '12px', border: 'none', boxShadow: '0 4px 12px rgba(0,0,0,0.1)', backgroundColor: 'rgba(30, 30, 30, 0.8)', color: '#fff' }} itemStyle={{ color: '#fff' }} />
                             </PieChart>
                         </ResponsiveContainer>
                     </div>
@@ -194,8 +193,8 @@ const Reports: React.FC = () => {
                         {expenseBreakdown.map((item) => (
                             <div key={item.name} className="flex items-center gap-2">
                                 <div className="w-3 h-3 rounded-full" style={{ backgroundColor: item.color }} />
-                                <span className="text-sm text-beige-700">{item.name}</span>
-                                <span className="text-sm font-bold text-beige-900 ml-auto">₹{item.value.toLocaleString()}</span>
+                                <span className="text-sm text-beige-700 dark:text-dark-text-secondary">{item.name}</span>
+                                <span className="text-sm font-bold text-beige-900 dark:text-dark-text-primary ml-auto">₹{item.value.toLocaleString()}</span>
                             </div>
                         ))}
                     </div>
@@ -203,24 +202,24 @@ const Reports: React.FC = () => {
             </div>
 
             {/* Client Growth */}
-            <div className="bg-white rounded-card p-card shadow-card border border-beige-200">
+            <div className="bg-white dark:bg-dark-surface/65 backdrop-blur-xl rounded-card p-card shadow-card border border-beige-200 dark:border-white/5">
                 <div className="flex items-center justify-between mb-6">
                     <div>
-                        <h3 className="text-xl font-bold text-beige-900">Client Growth</h3>
-                        <p className="text-sm text-beige-600">New clients acquired over time</p>
+                        <h3 className="text-xl font-bold text-beige-900 dark:text-dark-text-primary">Client Growth</h3>
+                        <p className="text-sm text-beige-600 dark:text-dark-text-secondary">New clients acquired over time</p>
                     </div>
-                    <button className="p-2 hover:bg-beige-100 rounded-full transition-colors">
-                        <span className="material-icons-round text-beige-600">more_vert</span>
+                    <button className="p-2 hover:bg-beige-100 dark:hover:bg-white/10 rounded-full transition-colors">
+                        <span className="material-icons-round text-beige-600 dark:text-dark-text-secondary">more_vert</span>
                     </button>
                 </div>
                 <div className="h-[300px]">
                     <ResponsiveContainer width="100%" height="100%">
                         <BarChart data={clientGrowth}>
-                            <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#E8E8C8" />
-                            <XAxis dataKey="month" axisLine={false} tickLine={false} tick={{ fill: '#9C9C80', fontSize: 12 }} />
-                            <YAxis axisLine={false} tickLine={false} tick={{ fill: '#9C9C80', fontSize: 12 }} />
-                            <Tooltip contentStyle={{ borderRadius: '12px', border: 'none', boxShadow: '0 4px 12px rgba(0,0,0,0.1)' }} />
-                            <Bar dataKey="clients" fill="#00674F" radius={[8, 8, 0, 0]} />
+                            <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="currentColor" className="text-beige-200 dark:text-white/5" />
+                            <XAxis dataKey="month" axisLine={false} tickLine={false} tick={{ fill: 'currentColor', fontSize: 12 }} className="text-beige-400 dark:text-dark-text-disabled" />
+                            <YAxis axisLine={false} tickLine={false} tick={{ fill: 'currentColor', fontSize: 12 }} className="text-beige-400 dark:text-dark-text-disabled" />
+                            <Tooltip contentStyle={{ borderRadius: '12px', border: 'none', boxShadow: '0 4px 12px rgba(0,0,0,0.1)', backgroundColor: 'rgba(30, 30, 30, 0.8)', color: '#fff' }} itemStyle={{ color: '#fff' }} />
+                            <Bar dataKey="clients" fill="#00674F" radius={[8, 8, 0, 0]} className="fill-primary dark:fill-dark-accent" />
                         </BarChart>
                     </ResponsiveContainer>
                 </div>

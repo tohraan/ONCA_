@@ -1,5 +1,4 @@
 
-
 import React, { useState } from 'react';
 import Button from '../components/Button';
 import SearchBar from '../components/SearchBar';
@@ -13,7 +12,6 @@ import { Client } from '../types';
 
 const ClientManagement: React.FC = () => {
     const [isAddModalOpen, setIsAddModalOpen] = useState(false);
-    const [searchQuery, setSearchQuery] = useState('');
 
     // Mock data
     const clients: Client[] = [
@@ -73,8 +71,8 @@ const ClientManagement: React.FC = () => {
             {/* Header */}
             <div className="flex flex-col md:flex-row items-start md:items-center justify-between mb-8 gap-6 mt-8">
                 <div>
-                    <h1 className="text-4xl font-bold mb-2 tracking-tight text-beige-900">Client Management</h1>
-                    <p className="text-beige-600 text-lg">Manage your clients and their compliance requirements</p>
+                    <h1 className="text-4xl font-bold mb-2 tracking-tight text-beige-900 dark:text-dark-text-primary">Client Management</h1>
+                    <p className="text-beige-600 dark:text-dark-text-secondary text-lg">Manage your clients and their compliance requirements</p>
                 </div>
                 <QuickActions
                     actions={[
@@ -103,11 +101,11 @@ const ClientManagement: React.FC = () => {
             </div>
 
             {/* Filters */}
-            <div className="bg-white rounded-card p-6 shadow-card border border-beige-200 mb-6">
+            <div className="bg-white dark:bg-dark-surface/65 backdrop-blur-xl rounded-card p-6 shadow-card border border-beige-200 dark:border-white/5 mb-6">
                 <div className="flex flex-col md:flex-row gap-4">
                     <SearchBar
                         placeholder="Search clients..."
-                        onSearch={setSearchQuery}
+                        onSearch={() => { }}
                     />
                     <Select
                         options={[
@@ -138,7 +136,7 @@ const ClientManagement: React.FC = () => {
                         fullWidth={false}
                         className="min-w-[200px]"
                     />
-                    <button className="text-primary hover:text-primary-dark font-semibold whitespace-nowrap">
+                    <button className="text-primary dark:text-dark-accent hover:text-primary-dark dark:hover:text-white font-semibold whitespace-nowrap">
                         Clear
                     </button>
                 </div>
@@ -149,21 +147,21 @@ const ClientManagement: React.FC = () => {
                 {clients.map((client) => (
                     <div
                         key={client.id}
-                        className="bg-white rounded-card p-card shadow-card border border-beige-200 hover:shadow-card-hover transition-all cursor-pointer"
+                        className="bg-white dark:bg-dark-surface/65 backdrop-blur-xl rounded-card p-card shadow-card border border-beige-200 dark:border-white/5 hover:shadow-card-hover dark:hover:border-dark-accent transition-all cursor-pointer group"
                     >
                         {/* Client Header */}
                         <div className="flex items-start justify-between mb-4">
                             <div className="flex items-center gap-3">
-                                <div className="w-12 h-12 bg-primary/10 text-primary rounded-full flex items-center justify-center font-bold text-lg">
+                                <div className="w-12 h-12 bg-primary/10 dark:bg-dark-accent/10 text-primary dark:text-dark-accent rounded-full flex items-center justify-center font-bold text-lg">
                                     {client.companyName.charAt(0)}
                                 </div>
                                 <div>
-                                    <h3 className="font-bold text-beige-900">{client.companyName}</h3>
-                                    <p className="text-sm text-beige-600">{client.contactPerson}</p>
+                                    <h3 className="font-bold text-beige-900 dark:text-dark-text-primary group-hover:text-primary dark:group-hover:text-dark-accent transition-colors">{client.companyName}</h3>
+                                    <p className="text-sm text-beige-600 dark:text-dark-text-secondary">{client.contactPerson}</p>
                                 </div>
                             </div>
-                            <button className="p-2 hover:bg-beige-100 rounded-full transition-colors">
-                                <span className="material-icons-round text-beige-600">more_vert</span>
+                            <button className="p-2 hover:bg-beige-100 dark:hover:bg-white/10 rounded-full transition-colors">
+                                <span className="material-icons-round text-beige-600 dark:text-dark-text-secondary">more_vert</span>
                             </button>
                         </div>
 
@@ -185,13 +183,13 @@ const ClientManagement: React.FC = () => {
                         </div>
 
                         {/* Compliance Info */}
-                        <div className="bg-beige-50 rounded-xl p-4 border border-beige-200">
+                        <div className="bg-beige-50 dark:bg-white/5 rounded-xl p-4 border border-beige-200 dark:border-white/10">
                             <div className="flex items-center justify-between mb-2">
-                                <span className="text-xs font-bold text-beige-600 uppercase tracking-wider">Next Task</span>
-                                <span className="text-xs text-beige-500">{client.dueDate}</span>
+                                <span className="text-xs font-bold text-beige-600 dark:text-dark-text-disabled uppercase tracking-wider">Next Task</span>
+                                <span className="text-xs text-beige-500 dark:text-dark-text-disabled">{client.dueDate}</span>
                             </div>
-                            <p className="font-bold text-beige-900 mb-2">{client.nextTask}</p>
-                            <p className="text-sm text-beige-600">Assigned: {client.assignedCA}</p>
+                            <p className="font-bold text-beige-900 dark:text-dark-text-primary mb-2">{client.nextTask}</p>
+                            <p className="text-sm text-beige-600 dark:text-dark-text-secondary">Assigned: {client.assignedCA}</p>
                         </div>
                     </div>
                 ))}
