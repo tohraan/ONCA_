@@ -10,12 +10,11 @@ const App: React.FC = () => {
     const [stage, setStage] = useState<AppStage>('LOADING');
 
     const handleLoadingComplete = () => {
-        const isOnboarded = localStorage.getItem('onca_onboarded') === 'true';
-        setStage(isOnboarded ? 'PORTAL' : 'ONBOARDING');
+        // Always show onboarding
+        setStage('ONBOARDING');
     };
 
     const handleOnboardingComplete = () => {
-        localStorage.setItem('onca_onboarded', 'true');
         setStage('PORTAL');
     };
 

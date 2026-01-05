@@ -37,16 +37,22 @@ const Sidebar: React.FC<SidebarProps> = ({ activeTab, onTabChange }) => {
             }`}>
             {/* Logo & Toggle */}
             <div className="px-4 mb-8 flex items-center justify-between">
-                <div className={`flex items-center gap-3 transition-opacity duration-300 ${isExpanded ? 'opacity-100' : 'opacity-0 w-0'}`}>
+                <button
+                    onClick={() => onTabChange('DASHBOARD')}
+                    className={`flex items-center gap-3 transition-opacity duration-300 hover:opacity-80 ${isExpanded ? 'opacity-100' : 'opacity-0 w-0'}`}
+                >
                     <div className="w-10 h-10 flex items-center justify-center flex-shrink-0">
                         <img src="/onca-logo.png" alt="ONCA" className="w-full h-full object-contain dark:invert" />
                     </div>
                     <span className="font-bold text-lg text-beige-900 dark:text-dark-text-primary whitespace-nowrap">ONCA</span>
-                </div>
+                </button>
                 {!isExpanded && (
-                    <div className="w-12 h-12 flex items-center justify-center mx-auto">
+                    <button
+                        onClick={() => onTabChange('DASHBOARD')}
+                        className="w-12 h-12 flex items-center justify-center mx-auto hover:opacity-80 transition-opacity"
+                    >
                         <img src="/onca-logo.png" alt="ONCA" className="w-full h-full object-contain dark:invert" />
-                    </div>
+                    </button>
                 )}
                 {isExpanded && (
                     <button
